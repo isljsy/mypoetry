@@ -14,6 +14,15 @@ import java.util.List;
  **/
 public class AuthorDaoImpl extends Dao implements AuthorDao {
     /**
+     * @param pinyin
+     * @return
+     */
+    @Override
+    public int pinyinAuthorCount(String pinyin) {
+        return 0;
+    }
+
+    /**
      * @return 所有诗人和词人
      */
     @Override
