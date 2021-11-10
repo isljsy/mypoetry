@@ -28,13 +28,14 @@ public class AuthorDaoImpl extends Dao implements AuthorDao {
     @Override
     public List<Author> findAll(int start, int limit) {
         List<Author> list = null;
-        String sql = "select distinct `author`, `dynasty` from `author` limit ?, ?";
+        String sql = "select `id`, `author`, `dynasty` from `author` limit ?, ?";
         db.executeQuery(sql, Arrays.asList(start, limit));
         list = new ArrayList<>();
         while (db.next()) {
             Author author = new Author();
-            author.setName(db.getString(1));
-            author.setDynasty(db.getString(2));
+            author.setId(db.getInt(1));
+            author.setName(db.getString(2));
+            author.setDynasty(db.getString(3));
             list.add(author);
         }
         System.out.println("取到:" + list.size());

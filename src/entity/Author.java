@@ -10,6 +10,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * @author ljsy
  **/
 public class Author {
+    private int id;
     private String name;
     private String dynasty;
     private String lifeTime;
@@ -22,6 +23,18 @@ public class Author {
                 ", dynasty='" + dynasty + '\'' +
                 ", lifeTime='" + lifeTime + '\'' +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
     }
 
     public String getPinyin() {
