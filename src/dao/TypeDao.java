@@ -16,4 +16,12 @@ public interface TypeDao {
      */
     List<Type> findAll(int start,int size);
 
+    /**
+     * 返回该作者的诗词的所有类型
+     * @param id 作者id
+     * @param start
+     * @param size
+     * @return
+     */
+    List<Type> findByAuthor(int id, int start, int size);
 }

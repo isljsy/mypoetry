@@ -13,12 +13,26 @@ import java.util.List;
  * @author ljsy
  **/
 public class AuthorDaoImpl extends Dao implements AuthorDao {
+
     /**
-     * @param pinyin
-     * @return
+     * 以该字母为拼音开头的作者总数
+     *
+     * @param pinyin 拼音首字母
+     * @return 作者总数
      */
     @Override
     public int pinyinAuthorCount(String pinyin) {
+        return 0;
+    }
+
+    /**
+     * 此朝代的所有作者
+     *
+     * @param id 朝代id
+     * @return 作者总数
+     */
+    @Override
+    public int dynastyAuthorCount(int id) {
         return 0;
     }
 
@@ -46,13 +60,29 @@ public class AuthorDaoImpl extends Dao implements AuthorDao {
      * 拼音首字母找作者
      *
      * @param pinyin 拼音首字母
-     * @param page   获取的页数
+     * @param start  查询开始点
+     * @param size   获取的数量
      * @return 姓名拼音以此字母开头的作者
      */
     @Override
-    public List<Author> findAuthorsByPinyin(String pinyin, Page page) {
+    public List<Author> findAuthorByPinyin(String pinyin, int start, int size) {
         return null;
     }
+
+    /**
+     * 以朝代找作者
+     *
+     * @param id    朝代id
+     * @param start 查询开始
+     * @param size  返回长度
+     * @return 作者数组
+     */
+    @Override
+    public List<Author> findAuthorByDynasty(int id, int start, int size) {
+        return null;
+    }
+
+
 
     /**
      * id删除作者

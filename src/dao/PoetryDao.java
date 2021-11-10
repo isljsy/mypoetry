@@ -17,9 +17,40 @@ public interface PoetryDao {
      */
     List<Poetry> findAll(int start, int size);
 
-    List<Poetry> findByAuthor(Author author, int start, int size);
+    /**
+     * 通过朝代找诗词
+     * @param id 朝代id
+     * @param start
+     * @param size
+     * @return
+     */
+    List<Poetry> findByDynasty(int id, int start, int size);
 
-    List<Poetry> findByType(String type,int start, int size);
+    /**
+     * 通过作者找诗词
+     * @param id 作者id
+     * @param start
+     * @param size
+     * @return
+     */
+    List<Poetry> findByAuthor(int id, int start, int size);
 
-    List<Poetry> findByAuthorAndType(Author author, String type, int start, int size);
+    /**
+     * 通过类型找诗词
+     * @param id 类型id
+     * @param start
+     * @param size
+     * @return
+     */
+    List<Poetry> findByType(int id,int start, int size);
+
+    /**
+     * 通过作者和类型找诗词
+     * @param authorId
+     * @param typeId
+     * @param start
+     * @param size
+     * @return
+     */
+    List<Poetry> findByAuthorAndType(int authorId, int typeId, int start, int size);
 }
