@@ -10,6 +10,15 @@ import java.util.List;
  **/
 public interface PoetryDao {
     /**
+     * 搜索词搜索的结果
+     * @param word
+     * @param start
+     * @param size
+     * @return
+     */
+    List<Poetry> searchPoetry(String word, int start, int size);
+
+    /**
      * 返回指定起点和长度的诗词数组
      * @param start 查询开始点
      * @param size  返回集合长度

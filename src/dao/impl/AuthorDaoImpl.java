@@ -16,7 +16,7 @@ public class AuthorDaoImpl extends Dao implements AuthorDao {
 
     /**
      * 以该字母为拼音开头的作者总数
-     *
+     * 若拼音为空, 返回id排序的作者
      * @param pinyin 拼音首字母
      * @return 作者总数
      */
