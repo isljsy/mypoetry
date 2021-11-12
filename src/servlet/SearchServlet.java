@@ -23,7 +23,7 @@ public class SearchServlet extends HttpServlet {
         PoetryService poetryService ;
         AuthorService authorService;
 
-        request.getRequestDispatcher("search.jsp").forward(request,response);
+        request.getRequestDispatcher("type.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

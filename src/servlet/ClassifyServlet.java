@@ -57,7 +57,7 @@ public class ClassifyServlet extends HttpServlet {
         request.setAttribute("typeList",typesList);
 
         // 转发到分类页面
-        request.getRequestDispatcher("classify.jsp").forward(request,response);
+        request.getRequestDispatcher("dynasty.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
