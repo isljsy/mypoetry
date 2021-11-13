@@ -20,11 +20,11 @@ public interface PoetryDao {
 
     /**
      * 返回指定起点和长度的诗词数组
-     * @param start 查询开始点
+     * @param start id开始点
      * @param size  返回集合长度
      * @return size个诗词
      */
-    List<Poetry> findAll(int start, int size);
+    List<Poetry> findAll(int start,int from, int size);
 
     /**
      * 通过朝代找诗词
@@ -62,4 +62,11 @@ public interface PoetryDao {
      * @return
      */
     List<Poetry> findByAuthorAndType(int authorId, int typeId, int start, int size);
+
+    /**
+     * 所有诗词总数
+     *
+     * @return
+     */
+    int countAll();
 }

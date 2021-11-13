@@ -30,16 +30,18 @@ public class DBHelper {
     }
 
     /**
+     * 出错或为null, 则返回""
      * @param index 字段序号
      * @return rs.getString();
      */
     public String getString(int index) {
         try {
-            return rs.getString(index);
+            String string = rs.getString(index);
+            return string == null ? "" : string;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     /**

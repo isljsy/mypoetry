@@ -20,4 +20,15 @@ public class DynastyServiceImpl implements DynastyService {
     public List<Dynasty> findAll() {
         return null;
     }
+
+    /**
+     * 有描述的朝代对象
+     *
+     * @param id 朝代id
+     * @return
+     */
+    @Override
+    public Dynasty findById(int id) {
+        return null;
+    }
 }

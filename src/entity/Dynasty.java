@@ -7,7 +7,15 @@ package entity;
 public class Dynasty {
     private int id;
     private String dynastyName;
-    private String describe;
+    private String[] describe;
+
+    @Override
+    public String toString() {
+        return "Dynasty{" +
+                "id=" + id +
+                ", dynastyName='" + dynastyName + '\'' +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -25,11 +33,11 @@ public class Dynasty {
         this.dynastyName = dynastyName;
     }
 
-    public String getDescribe() {
+    public String[] getDescribe() {
         return describe;
     }
 
     public void setDescribe(String describe) {
-        this.describe = describe;
+        this.describe = describe.split("/");
     }
 }

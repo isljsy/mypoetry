@@ -2,14 +2,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: ljsy
-  Date: 2021/11/11
-  Time: 上午 9:08
+  Date: 2021/11/13
+  Time: 下午 2:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set value="${requestScope.s}" var="s"/>
 <c:set value="${requestScope.page}" var="page"/>
 <c:set value="${pageContext.request.contextPath}" var="path"/>
+<c:set value="${requestScope.poetry}" var="showPoetry"/>
 <html>
 <head>
     <title>古诗词网</title>
@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="${pageContext.request.contextPath}/index">首页 <span
+                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/index">首页 <span
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -55,20 +55,68 @@
 
 <!-- 展示诗词 -->
 <div class="container vw-50 full-poetry">
+    <div class="card">
+        <div class="card-body">
+            <h3><a class="card-title text-dark">${showPoetry.title}</a></h3>
+            <p>
+                <a class="card-subtitle mb-2 text-muted"
+                   href="${path}/${showPoetry.author.dynasty.id}">[${showPoetry.author.dynasty.dynastyName}]</a>
+                <a class="card-subtitle mb-2 text-muted"
+                   href="${pageContext.request.contextPath}/">${showPoetry.author.name}</a>
+            </p>
+            <%--诗句--%>
+            <c:forEach items="${showPoetry.content}" var="varse">
+                <p class="card-text">${varse}</p>
+            </c:forEach>
+            <%--注释等--%>
+            <div class="card-footer">
+                <button class="btn card-link explanation-btn btn-active">注释</button>
+                <button class="btn card-link explanation-btn">翻译</button>
+                <button class="btn card-link explanation-btn">赏析</button>
+                <button class="btn card-link explanation-btn">作者</button>
+                <div class=" explanation">
+                    <!-- 注释 -->
+                    <div class="show notes">
+                        <c:forEach items="${showPoetry.notes}" var="note">
+                            <p>${note}</p>
+                        </c:forEach>
+                    </div>
+                    <!-- 翻译 -->
+                    <div class="hide translate">
+                        <c:forEach items="${showPoetry.translate}" var="translate">
+                            <p>${translate}</p>
+                        </c:forEach>
+                        <c:forEach items="${showPoetry.translateRes}" var="translateRes">
+                            <p class="res text-muted">${translateRes}</p>
+                        </c:forEach>
+                    </div>
+                    <!-- 赏析 -->
+                    <div class="hide appreciation">
+                        <c:forEach items="${showPoetry.appreciation}" var="appr">
+                            <p>${appr}</p>
+                        </c:forEach>
+                    </div>
+                    <!-- 作者介绍 -->
+                    <div class="hide author">
+                        <p>${showPoetry.author.lifeTime}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bd-callout">
+        <p>与${showPoetry.title}相似</p>
+    </div>
+    <%--同类型诗词--%>
     <c:forEach items="${requestScope.list}" var="poetry">
         <div class="card">
             <div class="card-body">
-                    <%--标题--%>
-                <h3><a class="card-title text-dark" href="${path}/poetry?poetry=${poetry.id}">${poetry.title}</a></h3>
+                <h3><a class="card-title text-dark">${poetry.title}</a></h3>
                 <p>
-                        <%--朝代 --%>
-                    <a class="card-subtitle mb-2 text-muted" href="${path}/dynasty?dynasty=${poetry.author.dynasty.id}">
-                        [${poetry.author.dynasty.dynastyName}]
-                    </a>
-                        <%--作者--%>
-                    <a class="card-subtitle mb-2 text-muted" href="${path}/author-details?author=${poetry.author.id}">
-                            ${poetry.author.name}
-                    </a>
+                    <a class="card-subtitle mb-2 text-muted"
+                       href="${path}/${poetry.author.dynasty.id}">[${poetry.author.dynasty.dynastyName}]</a>
+                    <a class="card-subtitle mb-2 text-muted"
+                       href="${path}/">${poetry.author.name}</a>
                 </p>
                     <%--诗句--%>
                 <c:forEach items="${poetry.content}" var="varse">
@@ -77,13 +125,13 @@
             </div>
                 <%--注释等--%>
             <div class="card-footer">
-                <button class="btn card-link explanation-btn">注释</button>
+                <button class="btn card-link explanation-btn btn-active">注释</button>
                 <button class="btn card-link explanation-btn">翻译</button>
                 <button class="btn card-link explanation-btn">赏析</button>
                 <button class="btn card-link explanation-btn">作者</button>
-                <div class="explanation">
+                <div class=" explanation">
                     <!-- 注释 -->
-                    <div class="hide notes">
+                    <div class="show notes">
                         <c:forEach items="${poetry.notes}" var="note">
                             <p>${note}</p>
                         </c:forEach>
@@ -114,34 +162,34 @@
     <%--分页--%>
     <nav aria-label="Page navigation example ">
         <ul class="pagination justify-content-end">
-            <%--没有上一页时--%>
             <c:if test="${page.pageNo==1}">
-                <li class="page-item disabled"><a class="page-link text-dark" href="#">上一页</a></li>
+                <li class="page-item disabled">
+                    <a class="page-link text-dark" href="#">
+                        上一页
+                    </a>
+                </li>
             </c:if>
-            <%--上一页--%>
-            <c:if test="${page.pageNo>1}">
-                <li class="page-item"><a class="page-link text-dark"
-                                         href="${path}/index?s=${s}&page=${page.pageNo-1}">上一页</a>
+            <c:if test="${page.pageNo!=1}">
+                <li class="page-item">
+                    <a class="page-link text-dark" href="${path}/poetry?author=${showPoetry.id}&page=${page.pageNo-1}">
+                        上一页
+                    </a>
                 </li>
             </c:if>
 
             <li class="page-item"><a class="page-link text-dark">${page.pageNo}/${page.totalPages}</a></li>
 
-            <%--没有下一页--%>
             <c:if test="${page.pageNo==page.totalPages}">
                 <li class="page-item disabled"><a class="page-link text-dark" href="#">下一页</a></li>
             </c:if>
-            <%--下一页--%>
             <c:if test="${page.pageNo!=page.totalPages}">
                 <li class="page-item"><a class="page-link text-dark"
-                                         href="${path}/index?s=${s}&page=${page.pageNo+1}">下一页</a>
+                                         href="${path}/poetry?author=${showPoetry.id}&page=${page.pageNo+1}">上一页</a>
                 </li>
-            </c:if>
-        </ul>
+            </c:if></ul>
     </nav>
 </div>
 <!-- 展示诗词结束 -->
-
 
 <%@include file="footer.jsp" %>
 </body>

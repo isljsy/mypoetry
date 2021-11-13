@@ -72,4 +72,31 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> findAuthorByDynasty(int id, Page page) {
         return null;
     }
+
+    /**
+     * 以朝代和拼音找作者
+     * 朝代为0, 则以拼音找作者
+     * 拼音为*, 则以朝代找作者
+     * 若两者为空, 则以id排序作者
+     *
+     * @param dynastyId  朝代id
+     * @param pinyin     拼音
+     * @param authorPage 页数
+     * @return 作者
+     */
+    @Override
+    public List<Author> findAuthorByDynastyAndPinyin(int dynastyId, String pinyin, Page authorPage) {
+        return null;
+    }
+
+    /**
+     * 以id找作者, 没有则返回null
+     *
+     * @param authorId
+     * @return
+     */
+    @Override
+    public Author findAuthorById(int authorId) {
+        return null;
+    }
 }

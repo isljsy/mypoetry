@@ -7,14 +7,16 @@ public class Poetry {
 
     private int id;
     private String title;
-    private String author;
-    private String content;
-    private String translate;
-    private String getTranslateRes;
-    private String notes;
-    private String appreciation;
-    private String appreciationRes;
-    private String type;
+    private Author author;
+    private String[] content;
+    private String[] translate;
+    private String[] translateRes;
+    private String[] notes;
+    private String[] appreciation;
+    private String[] appreciationRes;
+    private Type type;
+
+
 
     public int getId() {
         return id;
@@ -32,67 +34,67 @@ public class Poetry {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
-    public String getContent() {
+    public String[] getContent() {
         return content;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.content = content.split("/");
     }
 
-    public String getTranslate() {
+    public String[] getTranslate() {
         return translate;
     }
 
     public void setTranslate(String translate) {
-        this.translate = translate;
+        this.translate = translate.split("/");
     }
 
-    public String getGetTranslateRes() {
-        return getTranslateRes;
+    public String[] getTranslateRes() {
+        return translateRes;
     }
 
-    public void setGetTranslateRes(String getTranslateRes) {
-        this.getTranslateRes = getTranslateRes;
+    public void setTranslateRes(String translateRes) {
+        this.translateRes = translateRes.split("/");
     }
 
-    public String getNotes() {
+    public String[] getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
-        this.notes = notes;
+        this.notes = notes.split("/");
     }
 
-    public String getAppreciation() {
+    public String[] getAppreciation() {
         return appreciation;
     }
 
     public void setAppreciation(String appreciation) {
-        this.appreciation = appreciation;
+        this.appreciation = appreciation.split("/");
     }
 
-    public String getAppreciationRes() {
+    public String[] getAppreciationRes() {
         return appreciationRes;
     }
 
     public void setAppreciationRes(String appreciationRes) {
-        this.appreciationRes = appreciationRes;
+        this.appreciationRes = appreciationRes.split("/");
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 }

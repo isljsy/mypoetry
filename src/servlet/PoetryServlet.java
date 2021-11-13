@@ -13,33 +13,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 /**
- * 首页展示, 随机诗词
+ * 诗词详情页
+ * 展示同类型诗词
+ * 诗词id和页数
  * @author ljsy
  **/
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/poetry")
+public class PoetryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PoetryService poetryService = new PoetryServiceImpl();
-        // 取参数
-        int start = RequestUtil.getIntParameter(request, "s");
-        int pageNo = RequestUtil.getIntParameter(request,"page");
-        // 随机数
-        start = start == 0 ? new Random().nextInt(100) + 1 : start;
-        // 页数, 只显示4页
-        Page page = new Page(pageNo,10,40);
-        // 取诗词
-        List<Poetry> list = poetryService.findAll(start, page);
 
-        request.setAttribute("list", list);
+        int poetryId = RequestUtil.getIntParameter(request,"poetry");
+        int pageNo = RequestUtil.getIntParameter(request,"page");
+
+        // 当前诗词
+        Poetry poetry = poetryService.findById(poetryId);
+        // 如果没找到诗词
+        if(poetry==null){
+            request.setAttribute("msg","没有这首诗词");
+            request.getRequestDispatcher("/pages/404.jsp").forward(request,response);
+            return;
+        }
+
+        Page page = new Page(pageNo, 15, poetryService.countByType(poetry.getType().getId()));
+        // 同类型诗词
+        List<Poetry> list = poetryService.findByType(poetry.getType().getId(), page);
+
+        request.setAttribute("poetry",poetry);
         request.setAttribute("page",page);
-        request.setAttribute("s",start);
-        request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+        request.setAttribute("list",list);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        doPost(request,response);
     }
 }

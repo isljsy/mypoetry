@@ -17,15 +17,14 @@ public interface PoetryService {
     List<Poetry> searchPoetry(String word, Page page );
 
     /**
-     * 返回指定起点和长度的诗词数组
-     * @param start 查询开始点
-     * @param size  返回集合长度
-     * @return size个诗词
+     * 返回指定id开始的诗词数组
+     * @param start 返回的诗词的id将大于start
+     * @return 诗词
      */
-    List<Poetry> findAll(int start, int size);
+    List<Poetry> findAll(int start, Page page);
 
     /**
-     * 通过朝代找诗词
+     * 通过朝代找诗词不含注释
      * @param id 朝代id
      * @return
      */
@@ -41,8 +40,7 @@ public interface PoetryService {
     /**
      * 通过类型找诗词
      * @param id 类型id
-
-     * @return
+     * @return 含注释等的诗词对象的集合
      */
     List<Poetry> findByType(int id, Page page );
 
@@ -53,4 +51,38 @@ public interface PoetryService {
      * @return
      */
     List<Poetry> findByAuthorAndType(int authorId, int typeId,Page page );
+
+    /**
+     * 作者的作品数
+     * @param authorId
+     * @return
+     */
+    int countByAuthor(int authorId);
+
+    /**
+     * 通过id找诗词
+     * @param poetryId
+     * @return
+     */
+    Poetry findById(int poetryId);
+
+    /**
+     * 同类型诗词计数
+     * @param id
+     * @return
+     */
+    int countByType(int id);
+
+    /**
+     * 所有诗词总数
+     * @return
+     */
+    int countAll();
+
+    /**
+     * 该朝代的诗词总数
+     * @param id
+     * @return
+     */
+    int countByDynasty(int id);
 }

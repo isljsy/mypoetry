@@ -28,7 +28,7 @@ public class AuthorTest {
         Author author = new Author();
         author.setName("林");
         author.setLifeTime("ss");
-        author.setDynasty("唐代");
+//        author.setDynasty("唐代");
         ad.addAuthor(author);
     }
 

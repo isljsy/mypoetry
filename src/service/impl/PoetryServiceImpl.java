@@ -28,16 +28,17 @@ public class PoetryServiceImpl implements PoetryService {
     }
 
     /**
-     * 返回指定起点和长度的诗词数组
+     * 返回指定id开始的诗词数组
      *
-     * @param start 查询开始点
-     * @param size  返回集合长度
-     * @return size个诗词
+     * @param start 返回的诗词的id将大于start
+     * @param page
+     * @return 诗词
      */
     @Override
-    public List<Poetry> findAll(int start, int size) {
-        return null;
+    public List<Poetry> findAll(int start, Page page) {
+        return poetryDao.findAll(start, page.getFrom(), page.getSize());
     }
+
 
     /**
      * 通过朝代找诗词
@@ -86,5 +87,59 @@ public class PoetryServiceImpl implements PoetryService {
     @Override
     public List<Poetry> findByAuthorAndType(int authorId, int typeId, Page page) {
         return null;
+    }
+
+    /**
+     * 作者的作品数
+     *
+     * @param authorId
+     * @return
+     */
+    @Override
+    public int countByAuthor(int authorId) {
+        return 0;
+    }
+
+    /**
+     * 通过id找诗词
+     *
+     * @param poetryId
+     * @return
+     */
+    @Override
+    public Poetry findById(int poetryId) {
+        return null;
+    }
+
+    /**
+     * 同类型诗词计数
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public int countByType(int id) {
+        return 0;
+    }
+
+    /**
+     * 所有诗词总数
+     *
+     * @return
+     */
+    @Override
+    public int countAll() {
+        return poetryDao.countAll();
+    }
+
+    /**
+     * 该朝代的诗词总数
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public int countByDynasty(int id) {
+        return 0;
     }
 }

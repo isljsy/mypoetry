@@ -11,33 +11,35 @@ public class Page {
      */
     private int size = 10;
     /**
-     * 数据库查询开始点
+     * 数据库查询limit开始点
      */
-    private int start = 0;
+    private int from = 0;
 
     /**
-     * @param pageNo    当前页数
+     * @param pageNo    当前页数, 默认为1
      * @param size      每页对象数量
      * @param itemCount 数据库中对象总数
      */
     public Page(int pageNo, int size, int itemCount) {
+        // 页面总数
         itemCount = itemCount % size == 0 ? itemCount / size : (itemCount / size) + 1;
         setTotalPages(itemCount);
 
         setSize(size);
-        setStart((size - 1) * size);
         setPageNo(pageNo);
+        setFrom((this.pageNo - 1) * size);
     }
 
-    public int getStart() {
-        return start;
+    public int getFrom() {
+        return from;
     }
 
-    public void setStart(int start) {
-        if (start < 0) {
-            start = 0;
+    public void setFrom(int from) {
+        if (from < 0) {
+            from = 0;
         }
-        this.start = start;
+
+        this.from = from;
     }
 
     public int getPageNo() {

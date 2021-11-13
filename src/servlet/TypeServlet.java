@@ -17,13 +17,13 @@ import java.io.IOException;
  * 展示搜索框查询的结果
  * @author ljsy
  **/
-@WebServlet("/search")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/type")
+public class TypeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PoetryService poetryService ;
         AuthorService authorService;
 
-        request.getRequestDispatcher("type.jsp").forward(request,response);
+        request.getRequestDispatcher("/pages/type.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

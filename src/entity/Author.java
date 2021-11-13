@@ -12,7 +12,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 public class Author {
     private int id;
     private String name;
-    private String dynasty;
+    private Dynasty dynasty;
     private String lifeTime;
     private String pinyin;
 
@@ -46,21 +46,22 @@ public class Author {
     }
 
     public void setName(String name) {
-        char familyName = name.charAt(0);
-        try {
-            String[] pinyins = PinyinHelper.toHanyuPinyinStringArray(familyName, new HanyuPinyinOutputFormat());
-            pinyin = pinyins[0].substring(0, 1);
-        } catch (BadHanyuPinyinOutputFormatCombination badHanyuPinyinOutputFormatCombination) {
-            badHanyuPinyinOutputFormatCombination.printStackTrace();
-        }
+        // 整理数据库数据专用
+//        char familyName = name.charAt(0);
+//        try {
+//            String[] pinyins = PinyinHelper.toHanyuPinyinStringArray(familyName, new HanyuPinyinOutputFormat());
+//            pinyin = pinyins[0].substring(0, 1);
+//        } catch (BadHanyuPinyinOutputFormatCombination badHanyuPinyinOutputFormatCombination) {
+//            badHanyuPinyinOutputFormatCombination.printStackTrace();
+//        }
         this.name = name;
     }
 
-    public String getDynasty() {
+    public Dynasty getDynasty() {
         return dynasty;
     }
 
-    public void setDynasty(String dynasty) {
+    public void setDynasty(Dynasty dynasty) {
         this.dynasty = dynasty;
     }
 

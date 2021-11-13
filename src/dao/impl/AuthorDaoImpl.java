@@ -49,7 +49,7 @@ public class AuthorDaoImpl extends Dao implements AuthorDao {
             Author author = new Author();
             author.setId(db.getInt(1));
             author.setName(db.getString(2));
-            author.setDynasty(db.getString(3));
+//            author.setDynasty(db.getString(3));
             list.add(author);
         }
         System.out.println("取到:" + list.size());
