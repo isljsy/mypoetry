@@ -4,6 +4,7 @@ import dao.Dao;
 import dao.PoetryDao;
 import entity.Author;
 import entity.Dynasty;
+import entity.Explain;
 import entity.Poetry;
 
 import java.util.ArrayList;
@@ -16,36 +17,40 @@ import java.util.List;
 public class PoetryDaoImpl extends Dao implements PoetryDao {
     /**
      * 处理数据方法
-     * @param poetry
+     * @param explain
      */
-    public void changeContent(Poetry poetry){
-        String sql = "update `poetry` set `content` = ? where `id` = ?";
-        db.executeUpdate(sql,Arrays.asList(poetry.getTitle(),poetry.getId()));
+    public void changeExplain(Explain explain){
+        String sql = "update `poetry` set `content` = ?, `translate` = ?, `translate_res` = ?, `notes` = ?, `appreciation` = ?, `appreciation_res` = ?  where id = ?";
+        List<Object> list = new ArrayList<>();
+
+        list.add(explain.getContent());
+        list.add(explain.getTranslate());
+        list.add(explain.getTranslateRes());
+        list.add(explain.getNotes());
+        list.add(explain.getAppreciation());
+        list.add(explain.getAppreciationRes());
+        list.add(explain.getId());
+
+        db.executeUpdate(sql,list);
     }
 
     /**
      * title 代 content
      * @return
      */
-    public List<Poetry> findall(){
-        db.executeQuery("select `id`,`content`,`notes` from `poetry`");
-        List<Poetry> list = new ArrayList<>();
+    public List<Explain> findall(){
+        db.executeQuery("select `id`, `content`, `translate`, `translate_res`, `notes`, `appreciation`, `appreciation_res` from `poetry`");
+        List<Explain> list = new ArrayList<>();
         while (db.next()){
-            Poetry poetry = new Poetry();
-            poetry.setId(db.getInt(1));
-
-            String content = db.getString(2);
-            content = content.replace("[\"","");
-            content = content.replace("\"]","");
-            content = content.replace("\",\"","/");
-// 转注释, 请先在sql加上notes
-//            String notes = db.getString(3);
-//            notes = notes.replaceAll("\".*?。","");
-//            notes = notes.replace("\",","");
-//            notes = notes.replace("。","/");
-
-            poetry.setTitle(content);
-            list.add(poetry);
+            Explain explain = new Explain();
+            explain.setId(db.getInt(1));
+            explain.setContent(db.getString(2));
+            explain.setTranslate(db.getString(3));
+            explain.setTranslateRes(db.getString(4));
+            explain.setNotes(db.getString(5));
+            explain.setAppreciation(db.getString(6));
+            explain.setAppreciationRes(db.getString(7));
+            list.add(explain);
         }
         return  list;
     }
