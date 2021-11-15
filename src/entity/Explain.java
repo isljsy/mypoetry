@@ -58,7 +58,8 @@ public class Explain {
     }
 
     public void setNotes(String notes) {
-        notes = notes.replaceAll("[\\[\\]]","");
+        notes = notes.replace("[","");
+        notes = notes.replace("\"]","");
         notes = notes.replaceAll("\".*?。", "");
         notes = notes.replace("\",", "");
         notes = notes.replace("。", "。/");
