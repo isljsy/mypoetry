@@ -11,11 +11,9 @@
 <c:set value="${requestScope.page}" var="page"/>
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 <html>
-<head>
-    <title>古诗词网</title>
-</head>
-<body>
 <%@include file="head.jsp" %>
+
+<body>
 
 <!-- 导航栏 -->
 <header>

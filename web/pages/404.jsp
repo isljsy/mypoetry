@@ -7,11 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>古诗词网 404</title>
-</head>
-<body>
 <%@include file="head.jsp" %>
+<body>
 
 <!-- 导航栏 -->
 <header>
@@ -26,7 +23,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="${pageContext.request.contextPath}/index">首页 <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="${pageContext.request.contextPath}/index">首页 <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/dynasty">朝代</a>
@@ -48,16 +46,17 @@
 </header>
 <!-- 导航栏结束 -->
 
-<div class="container-sm">
-    <div class="card">
-        <div class="card-body">
-            <c:if test="${requestScope.msg==null}">
-                <h2>此处一无所有</h2>
-            </c:if>
-            <c:if test="${requestScope.msg!=null}">
-                <h2>${requestScope.msg}</h2>
-            </c:if>
-        </div>
+<div class="container vw-50">
+    <img class="card-img-top" src="${pageContext.request.contextPath}/img/404.jpg"  alt=""/>
+    <div class="alert alert-secondary">
+        <h2>四零四 · 无处寻觅</h2>
+        <br/>
+        <c:if test="${requestScope.msg==null}">
+            <h4>山重水复疑无路, 柳暗花明又一村</h4>
+        </c:if>
+        <c:if test="${requestScope.msg!=null}">
+            <h4>${requestScope.msg}</h4>
+        </c:if>
     </div>
 </div>
 

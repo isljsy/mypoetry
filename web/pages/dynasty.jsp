@@ -6,13 +6,11 @@
   Time: 下午 9:04
   To change this template use File | Settings | File Templates.
 --%>
+<%--显示朝代列表或朝代详情--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>古诗词网</title>
-</head>
-<body>
 <%@include file="head.jsp" %>
+<body>
 <c:set value="${requestScope.page}" var="page"/>
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 <!-- 导航栏 -->
@@ -65,11 +63,11 @@
         <div class="d-flex list-group flex-row flex-wrap">
             <c:forEach items="${requestScope.dynastyList}" var="dynasty" >
                 <a
-                        <c:if test="${requestScope.dynastyId==dynasty.id}">
+                        <c:if test="${requestScope.dynasty.id==dynasty.id}">
                             href="#" class="btn line-btn btn-active"
                         </c:if>
-                        <c:if test="${requestScope.dynastyId!=dynasty.id}">
-                            href="${path}/dynasty?id=${dynasty.id}" class="btn line-btn"
+                        <c:if test="${requestScope.dynasty.id!=dynasty.id}">
+                            href="${path}/dynasty?dynasty=${dynasty.id}" class="btn line-btn"
                         </c:if>
                         >
                         ${dynasty.dynastyName}
@@ -124,7 +122,7 @@
             <c:if test="${page.pageNo!=1}">
                 <li class="page-item">
                     <a class="page-link text-dark"
-                       href="${path}/author-details?author=${requestScope.id}&page=${page.pageNo-1}">
+                       href="${path}/dynasty?dynasty=${requestScope.dynasty.id}&page=${page.pageNo-1}">
                         上一页
                     </a>
                 </li>
@@ -142,8 +140,8 @@
             <c:if test="${page.pageNo!=page.totalPages}">
                 <li class="page-item">
                     <a class="page-link text-dark"
-                       href="${path}/dynasty?id=${requestScope.id}&page=${page.pageNo+1}">
-                        上一页
+                       href="${path}/dynasty?dynasty=${requestScope.dynasty.id}&page=${page.pageNo+1}">
+                        下一页
                     </a>
                 </li>
             </c:if>

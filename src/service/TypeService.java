@@ -28,4 +28,11 @@ public interface TypeService {
      * @return
      */
     int typeForAuthorCount(int id);
+
+    /**
+     * 以id找类型
+     * @param typeId
+     * @return
+     */
+    Type findById(int typeId);
 }

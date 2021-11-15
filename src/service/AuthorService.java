@@ -14,14 +14,14 @@ public interface AuthorService {
      * @param pinyin 拼音首字母
      * @return 作者总数
      */
-    int pinyinAuthorCount(String pinyin);
+    int countByPinyin(String pinyin);
 
     /**
      * 此朝代的所有作者
      * @param id 朝代id
      * @return 作者总数
      */
-    int dynastyAuthorCount(int id);
+    int countByDynasty(int id);
 
     /**
      * 带分页的所有作者
@@ -47,9 +47,6 @@ public interface AuthorService {
 
     /**
      * 以朝代和拼音找作者
-     * 朝代为0, 则以拼音找作者
-     * 拼音为*, 则以朝代找作者
-     * 若两者为空, 则以id排序作者
      * @param dynastyId 朝代id
      * @param pinyin 拼音
      * @param authorPage 页数
@@ -63,4 +60,25 @@ public interface AuthorService {
      * @return
      */
     Author findAuthorById(int authorId);
+
+    /**
+     * 所有作者数
+     * @return
+     */
+    int countAll();
+
+    /**
+     * 此拼音和朝代的作者数
+     * @param dynastyId
+     * @param pinyin
+     * @return
+     */
+    int countByDynastyAndPinyin(int dynastyId, String pinyin);
+
+    /**
+     * 该朝代的所有作者的拼音
+     * @param dynastyId
+     * @return
+     */
+    List<String> findPinyinByDynasty(int dynastyId);
 }

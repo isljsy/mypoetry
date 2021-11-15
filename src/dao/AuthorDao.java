@@ -59,20 +59,6 @@ public interface AuthorDao {
      */
     int deleteAuthorById(int id);
 
-    /**
-     * 修改作者
-     *
-     * @param author 作者对象
-     * @return 修改影响的行数
-     */
-    int changeAuthor(Author author);
-
-    /**
-     * 修改姓名首字拼音字母
-     *
-     * @param author 要修改的作者
-     */
-    void changePinyin(Author author);
 
     /**
      * 添加作者
@@ -81,4 +67,59 @@ public interface AuthorDao {
      * @return 成功的行数
      */
     int addAuthor(Author author);
+
+    /**
+     * 所有作者数
+     * @return
+     */
+    int countAll();
+
+    /**
+     * 此朝代的所有作者
+     * @param id 朝代id
+     * @return 作者总数
+     */
+    int countByDynasty(int id);
+
+    /**
+     * 以该字母为拼音开头的作者总数
+     *
+     * @param pinyin 拼音首字母
+     * @return 作者总数
+     */
+    int countByPinyin(String pinyin);
+
+    /**
+     * 以朝代和拼音找作者
+     * @param dynastyId
+     * @param pinyin
+     * @param from
+     * @param size
+     * @return
+     */
+    List<Author> findAuthorByDynastyAndPinyin(int dynastyId, String pinyin, int from, int size);
+
+    /**
+     * 以id找作者, 没有则返回null
+     *
+     * @param authorId
+     * @return
+     */
+    Author findById(int authorId);
+
+    /**
+     * 此拼音和朝代的作者数
+     *
+     * @param dynastyId
+     * @param pinyin
+     * @return
+     */
+    int countByDynastyAndPinyin(int dynastyId, String pinyin);
+
+    /**
+     * 该朝代的所有作者的拼音
+     * @param dynastyId
+     * @return
+     */
+    List<String> findPinyinByDynasty(int dynastyId);
 }

@@ -39,7 +39,7 @@ public class DynastyServlet extends HttpServlet {
         List<Poetry> poetryList;
         // 若有朝代参数, 显示朝代的所有诗词
         if(dynastyId>0){
-            page = new Page(pageNo,15,poetryService.countByDynasty(dynastyId));
+            page = new Page(pageNo,10,poetryService.countByDynasty(dynastyId));
             poetryList = poetryService.findByDynasty(dynastyId,page);
             Dynasty dynasty = dynastyService.findById(dynastyId);
             request.setAttribute("dynasty",dynasty);

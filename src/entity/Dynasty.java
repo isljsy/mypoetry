@@ -9,6 +9,14 @@ public class Dynasty {
     private String dynastyName;
     private String[] describe;
 
+    public Dynasty() {
+    }
+
+    public Dynasty(int id, String dynastyName) {
+        this.id = id;
+        this.dynastyName = dynastyName;
+    }
+
     @Override
     public String toString() {
         return "Dynasty{" +

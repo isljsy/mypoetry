@@ -38,7 +38,7 @@ public class AuthorDetailsServlet extends HttpServlet {
             // 总诗词数
             int count = poetryService.countByAuthor(authorId);
 
-            Page page = new Page(pageNo, 15, count);
+            Page page = new Page(pageNo, 10, count);
             Author author = authorService.findAuthorById(authorId);
             List<Poetry> poetryList = poetryService.findByAuthor(authorId, page);
 
@@ -49,7 +49,7 @@ public class AuthorDetailsServlet extends HttpServlet {
 
             request.getRequestDispatcher("/pages/authordetails.jsp").forward(request,response);
         } else {
-            request.setAttribute("msg","这个诗人还没有收录");
+            request.setAttribute("msg","莫愁前路无知己, 天下谁人不识君");
             request.getRequestDispatcher("/pages/404.jsp").forward(request,response);
         }
 

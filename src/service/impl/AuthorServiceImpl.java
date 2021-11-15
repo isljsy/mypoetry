@@ -23,8 +23,8 @@ public class AuthorServiceImpl implements AuthorService {
      * @return 作者总数
      */
     @Override
-    public int pinyinAuthorCount(String pinyin) {
-        return 0;
+    public int countByPinyin(String pinyin) {
+        return authorDao.countByPinyin(pinyin);
     }
 
     /**
@@ -34,8 +34,8 @@ public class AuthorServiceImpl implements AuthorService {
      * @return 作者总数
      */
     @Override
-    public int dynastyAuthorCount(int id) {
-        return 0;
+    public int countByDynasty(int id) {
+        return authorDao.countByDynasty(id);
     }
 
     /**
@@ -46,7 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public List<Author> findAll(Page page) {
-        return null;
+        return authorDao.findAll(page.getFrom(),page.getSize());
     }
 
     /**
@@ -58,7 +58,7 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public List<Author> findAuthorByPinyin(String pinyin, Page page) {
-        return null;
+        return authorDao.findAuthorByPinyin(pinyin,page.getFrom(),page.getSize());
     }
 
     /**
@@ -70,23 +70,20 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public List<Author> findAuthorByDynasty(int id, Page page) {
-        return null;
+        return authorDao.findAuthorByDynasty(id, page.getFrom(),page.getSize());
     }
 
     /**
      * 以朝代和拼音找作者
-     * 朝代为0, 则以拼音找作者
-     * 拼音为*, 则以朝代找作者
-     * 若两者为空, 则以id排序作者
      *
      * @param dynastyId  朝代id
      * @param pinyin     拼音
-     * @param authorPage 页数
+     * @param page 页数
      * @return 作者
      */
     @Override
-    public List<Author> findAuthorByDynastyAndPinyin(int dynastyId, String pinyin, Page authorPage) {
-        return null;
+    public List<Author> findAuthorByDynastyAndPinyin(int dynastyId, String pinyin, Page page) {
+        return authorDao.findAuthorByDynastyAndPinyin(dynastyId,pinyin,page.getFrom(),page.getSize());
     }
 
     /**
@@ -97,6 +94,39 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public Author findAuthorById(int authorId) {
-        return null;
+        return authorDao.findById(authorId);
+    }
+
+    /**
+     * 所有作者数
+     *
+     * @return
+     */
+    @Override
+    public int countAll() {
+        return authorDao.countAll();
+    }
+
+    /**
+     * 此拼音和朝代的作者数
+     *
+     * @param dynastyId
+     * @param pinyin
+     * @return
+     */
+    @Override
+    public int countByDynastyAndPinyin(int dynastyId, String pinyin) {
+        return authorDao.countByDynastyAndPinyin(dynastyId,pinyin);
+    }
+
+    /**
+     * 该朝代的所有作者的拼音
+     *
+     * @param dynastyId
+     * @return
+     */
+    @Override
+    public List<String> findPinyinByDynasty(int dynastyId) {
+        return authorDao.findPinyinByDynasty(dynastyId);
     }
 }

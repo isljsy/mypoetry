@@ -49,7 +49,7 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public List<Poetry> findByDynasty(int id, Page page) {
-        return null;
+        return poetryDao.findByDynasty(id, page.getFrom(), page.getSize());
     }
 
     /**
@@ -61,7 +61,7 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public List<Poetry> findByAuthor(int id, Page page) {
-        return null;
+        return poetryDao.findByAuthor(id,page.getFrom(),page.getSize());
     }
 
     /**
@@ -73,7 +73,7 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public List<Poetry> findByType(int id, Page page) {
-        return null;
+        return poetryDao.findByType(id,page.getFrom(),page.getSize());
     }
 
     /**
@@ -97,7 +97,7 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public int countByAuthor(int authorId) {
-        return 0;
+        return poetryDao.countByAuthor(authorId);
     }
 
     /**
@@ -108,7 +108,7 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public Poetry findById(int poetryId) {
-        return null;
+        return poetryDao.findById(poetryId);
     }
 
     /**
@@ -119,7 +119,7 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public int countByType(int id) {
-        return 0;
+        return poetryDao.countByType(id);
     }
 
     /**
@@ -140,6 +140,6 @@ public class PoetryServiceImpl implements PoetryService {
      */
     @Override
     public int countByDynasty(int id) {
-        return 0;
+        return poetryDao.countByDynasty(id);
     }
 }

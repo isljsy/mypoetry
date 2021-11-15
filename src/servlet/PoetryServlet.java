@@ -37,13 +37,15 @@ public class PoetryServlet extends HttpServlet {
             return;
         }
 
-        Page page = new Page(pageNo, 15, poetryService.countByType(poetry.getType().getId()));
+        Page page = new Page(pageNo, 5, poetryService.countByType(poetry.getType().getId()));
         // 同类型诗词
         List<Poetry> list = poetryService.findByType(poetry.getType().getId(), page);
 
         request.setAttribute("poetry",poetry);
         request.setAttribute("page",page);
         request.setAttribute("list",list);
+
+        request.getRequestDispatcher("/pages/poetry.jsp").forward(request,response);
 
     }
 

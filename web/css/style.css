@@ -164,3 +164,16 @@ footer {
 .collapse nav{
     width: 100%;
 }
+
+.appreciation p{
+    text-indent: 32px;
+}
+
+.res{
+    font-size: smaller;
+    line-height: 1;
+}
+
+.m-top-lg{
+    margin-top: 9em;
+}

@@ -26,14 +26,15 @@ public interface PoetryDao {
      */
     List<Poetry> findAll(int start,int from, int size);
 
+
     /**
-     * 通过朝代找诗词
+     * 通过朝代找诗词 不含注释
      * @param id 朝代id
-     * @param start
+     * @param from
      * @param size
      * @return
      */
-    List<Poetry> findByDynasty(int id, int start, int size);
+    List<Poetry> findByDynasty(int id, int from, int size);
 
     /**
      * 通过作者找诗词
@@ -69,4 +70,36 @@ public interface PoetryDao {
      * @return
      */
     int countAll();
+
+    /**
+     * 该朝代的诗词总数
+     *
+     * @param id
+     * @return
+     */
+    int countByDynasty(int id);
+
+    /**
+     * 作者的作品数
+     *
+     * @param authorId
+     * @return
+     */
+    int countByAuthor(int authorId);
+
+    /**
+     * 通过id找诗词
+     *
+     * @param poetryId
+     * @return
+     */
+    Poetry findById(int poetryId);
+
+    /**
+     * 同类型诗词计数
+     *
+     * @param id
+     * @return
+     */
+    int countByType(int id);
 }

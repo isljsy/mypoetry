@@ -8,6 +8,11 @@ public class Type {
     private int id;
     private String typeName;
 
+    public Type(int id, String typeName) {
+        this.id = id;
+        this.typeName = typeName;
+    }
+
     public int getId() {
         return id;
     }

@@ -24,7 +24,7 @@ public interface PoetryService {
     List<Poetry> findAll(int start, Page page);
 
     /**
-     * 通过朝代找诗词不含注释
+     * 通过朝代找诗词 不含注释
      * @param id 朝代id
      * @return
      */

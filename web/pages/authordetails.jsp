@@ -8,11 +8,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>古诗词网</title>
-</head>
-<body>
 <%@include file="head.jsp" %>
+
+<body>
 <c:set value="${requestScope.page}" var="page"/>
 <c:set value="${pageContext.request.contextPath}" var="path"/>
 <c:set value="${requestScope.author}" var="author"/>
@@ -59,34 +57,43 @@
             <li class="breadcrumb-item"><a
                     href="${pageContext.request.contextPath}/author?dynasty=${author.dynasty.id}">${author.dynasty.dynastyName}</a>
             </li>
-            <li class="breadcrumb-item"><a
-                    href="${pageContext.request.contextPath}/author?dynasty=${author.dynasty.id}&pinyin=${author.pinyin}">${author.pinyin}</a>
+            <li class="breadcrumb-item">
+                <a href="${pageContext.request.contextPath}/author-details?author=${author.id}">
+                    ${author.name}
+                </a>
             </li>
-            <li class="breadcrumb-item text-muted">${author.name}</li>
+            <c:if test="${page.pageNo>1}">
+                <li class="breadcrumb-item text-muted">第${page.pageNo}页</li>
+            </c:if>
         </ol>
     </nav>
 </div>
 <!-- 分类栏结束 -->
 <!-- 展示诗词 -->
 <div class="container vw-50">
-    <div class="bd-callout">
-        <h5>${author.name}</h5>
-        <p class="text-muted">记录作品:${requestScope.count}首</p>
-        <p>${author.lifeTime}</p>
-    </div>
-
+    <%--作者详情, 只在第一页出现--%>
+    <c:if test="${page.pageNo==1}">
+        <div class="bd-callout">
+            <h2>
+                    ${author.name}
+            </h2>
+            <p class="res text-muted">收录作品:${requestScope.count}首</p>
+            <p>${author.lifeTime}</p>
+        </div>
+    </c:if>
     <c:forEach items="${requestScope.poetryList}" var="poetry">
         <div class="card">
             <div class="card-body">
                 <div class=" d-flex align-items-baseline">
-                    <h3><a class="card-title text-dark" href="#">${poetry.title}</a></h3>
+                    <h3><a class="card-title text-dark" href="${path}/poetry?poetry=${poetry.id}">${poetry.title}</a></h3>
                     <p>
-                        <a class="card-subtitle mb-2 text-muted" href="#">[${poetry.author.dynasty.dynastyName}]</a>
-                        <a class="card-subtitle mb-2 text-muted" href="#">${poetry.author.name}</a>
+                        <a class="card-subtitle mb-2 text-muted"
+                           href="${path}/dynasty?dynasty=${author.dynasty.id}">[${author.dynasty.dynastyName}]</a>
+                        <span class="card-subtitle mb-2 text-muted">${author.name}</span>
                     </p>
                 </div>
                     <%--只显示前两句--%>
-                <p class="card-text">${poetry.content[0]}${poetry.content[1]}...</p>
+                <p class="card-text">${poetry.content[0]}${poetry.content[1]}<a href="${path}/poetry?poetry=${poetry.id}">......</a></p>
             </div>
         </div>
     </c:forEach>
@@ -122,7 +129,7 @@
                 <li class="page-item">
                     <a class="page-link text-dark"
                        href="${path}/author-details?author=${author.id}&page=${page.pageNo+1}">
-                        上一页
+                        下一页
                     </a>
                 </li>
             </c:if>

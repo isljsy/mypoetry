@@ -13,7 +13,7 @@ public class AuthorTest {
 
     @Test
     public void findAll() {
-        ad.findAll(0, 100000).forEach(System.out::println);
+        ad.findAuthorByPinyin("l", 10,10).forEach(System.out::println);
     }
 
     @Test
@@ -36,6 +36,11 @@ public class AuthorTest {
     @Test
     public void setAllPinyin() {
         ad.findAll(0, 10000).forEach(System.out::println);
+    }
+
+    @Test
+    public void countAll(){
+        System.out.println(ad.countByDynastyAndPinyin(3,"l"));
     }
 
 }

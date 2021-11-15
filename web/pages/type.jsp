@@ -7,11 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>古诗词网</title>
-</head>
-<body>
 <%@include file="head.jsp"%>
+<c:set value="${requestScope.page}" var="page"/>
+<c:set value="${pageContext.request.contextPath}" var="path"/>
+<body>
 <!-- 导航栏 -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,7 +32,7 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/author">作者</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/type">类型</a>
+                        <a class="nav-link active" href="${pageContext.request.contextPath}/type">类型</a>
                     </li>
                 </ul>
                 <form action="searchresult.jsp" class="form-inline my-2 my-lg-0">
@@ -53,41 +52,84 @@
             <li class="breadcrumb-item"><a class="" data-toggle="collapse" href="#type" role="button" aria-expanded="false" aria-controls="collapseExample">所有类型</a></li>
         </ol>
     </nav>
+    <!-- 类型列表 -->
     <div class="border collapse show" id="type">
         <div class="d-flex list-group flex-row flex-wrap">
-            <a href="#" class="btn line-btn btn-active">所有 </a>
-            <a href="#" class="btn line-btn">李白 </a>
+            <c:forEach items="${requestScope.typeList}" var="type" >
+                <a
+                        <c:if test="${requestScope.type.id==type.id}">
+                            href="#" class="btn line-btn btn-active"
+                        </c:if>
+                        <c:if test="${requestScope.type.id!=type.id}">
+                            href="${path}/type?type=${type.id}" class="btn line-btn"
+                        </c:if>
+                >
+                        ${type.typeName}
+                </a>
+            </c:forEach>
         </div>
-        <nav aria-label="Page navigation example ">
-            <ul class="pagination justify-content-end">
-                <li class="page-item"><a class="page-link text-dark" href="#">上一页</a></li>
-                <li class="page-item"><a class="page-link text-dark">1/12</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">下一页</a></li>
-            </ul>
-        </nav>
     </div>
 </div>
 <!-- 类型结束 -->
 
 <!-- 展示诗词 -->
 <div class="container vw-50">
-    <div class="card">
-        <div class="card-body">
-            <div class=" d-flex align-items-baseline">
-                <h3><a class="card-title text-dark" href="#">行宫</a></h3>
+    <!-- 开始展示诗词 -->
+    <c:forEach items="${requestScope.poetryList}" var="poetry">
+        <div class="card">
+            <div class="card-body">
+                <h3><a class="card-title text-dark">${poetry.title}</a></h3>
                 <p>
-                    <a class="card-subtitle mb-2 text-muted" href="#">[唐代]</a>
-                    <a class="card-subtitle mb-2 text-muted" href="#">元稹</a>
+                    <a class="card-subtitle mb-2 text-muted"
+                       href="${path}/${poetry.author.dynasty.id}">[${poetry.author.dynasty.dynastyName}]</a>
+                    <a class="card-subtitle mb-2 text-muted"
+                       href="${path}/">${poetry.author.name}</a>
                 </p>
+                    <%--诗句--%>
+                <c:forEach items="${poetry.content}" var="varse">
+                    <p class="card-text">${varse}</p>
+                </c:forEach>
             </div>
-            <p class="card-text">寥落古行宫，宫花寂寞红。白头宫女在，闲坐说玄宗。</p>
         </div>
-    </div>
+
+    </c:forEach>
+    <%--分页--%>
     <nav aria-label="Page navigation example ">
         <ul class="pagination justify-content-end">
-            <li class="page-item"><a class="page-link text-dark" href="#">上一页</a></li>
-            <li class="page-item"><a class="page-link text-dark">1/12</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">下一页</a></li>
+
+            <c:if test="${page.pageNo==1}">
+                <li class="page-item disabled">
+                    <a class="page-link text-dark" href="#">
+                        上一页
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${page.pageNo!=1}">
+                <li class="page-item">
+                    <a class="page-link text-dark"
+                       href="${path}/dynasty?dynasty=${requestScope.type.id}&page=${page.pageNo-1}">
+                        上一页
+                    </a>
+                </li>
+            </c:if>
+
+            <li class="page-item"><a class="page-link text-dark">${page.pageNo}/${page.totalPages}</a></li>
+
+            <c:if test="${page.pageNo==page.totalPages}">
+                <li class="page-item disabled">
+                    <a class="page-link text-dark" href="#">
+                        下一页
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${page.pageNo!=page.totalPages}">
+                <li class="page-item">
+                    <a class="page-link text-dark"
+                       href="${path}/dynasty?dynasty=${requestScope.type.id}&page=${page.pageNo+1}">
+                        下一页
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </nav>
 </div>

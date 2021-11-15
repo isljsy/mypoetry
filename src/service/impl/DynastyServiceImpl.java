@@ -18,7 +18,7 @@ public class DynastyServiceImpl implements DynastyService {
      */
     @Override
     public List<Dynasty> findAll() {
-        return null;
+        return dynastyDao.findAll();
     }
 
     /**
@@ -29,6 +29,6 @@ public class DynastyServiceImpl implements DynastyService {
      */
     @Override
     public Dynasty findById(int id) {
-        return null;
+        return dynastyDao.findById(id);
     }
 }
