@@ -142,4 +142,28 @@ public class PoetryServiceImpl implements PoetryService {
     public int countByDynasty(int id) {
         return poetryDao.countByDynasty(id);
     }
+
+    /**
+     * 标题中含有title的诗词
+     *
+     * @param title
+     * @param page
+     * @return
+     */
+    @Override
+    public List<Poetry> findByTitle(String title, Page page) {
+        return poetryDao.findByTitle(title,page.getFrom(),page.getSize());
+    }
+
+    /**
+     * 内容中含有content的诗词
+     *
+     * @param content
+     * @param page
+     * @return
+     */
+    @Override
+    public List<Poetry> findByContent(String content, Page page) {
+        return poetryDao.findByContent(content,page.getFrom(),page.getSize());
+    }
 }

@@ -9,14 +9,7 @@ import java.util.List;
  * @author ljsy
  **/
 public interface PoetryDao {
-    /**
-     * 搜索词搜索的结果
-     * @param word
-     * @param start
-     * @param size
-     * @return
-     */
-    List<Poetry> searchPoetry(String word, int start, int size);
+
 
     /**
      * 返回指定起点和长度的诗词数组
@@ -54,15 +47,6 @@ public interface PoetryDao {
      */
     List<Poetry> findByType(int id,int start, int size);
 
-    /**
-     * 通过作者和类型找诗词
-     * @param authorId
-     * @param typeId
-     * @param start
-     * @param size
-     * @return
-     */
-    List<Poetry> findByAuthorAndType(int authorId, int typeId, int start, int size);
 
     /**
      * 所有诗词总数
@@ -102,4 +86,20 @@ public interface PoetryDao {
      * @return
      */
     int countByType(int id);
+
+    /**
+     * 标题中含有title的诗词
+     *
+     * @param title
+     * @return
+     */
+    List<Poetry> findByTitle(String title, int from, int size);
+
+    /**
+     * 内容中含有content的诗词
+     *
+     * @param content
+     * @return
+     */
+    List<Poetry> findByContent(String content, int from, int size);
 }

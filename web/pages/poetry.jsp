@@ -27,21 +27,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="${pageContext.request.contextPath}/index">首页 <span
+                        <a class="nav-link" href="${pageContext.request.contextPath}/index">首页 <span
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/dynasty">朝代</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="${pageContext.request.contextPath}/author">作者</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/type">类型</a>
                     </li>
                 </ul>
-                <form action="searchresult.jsp" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+                <form action="${path}/result" class="form-inline my-2 my-lg-0">
+                    <input  required name="words"  class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
                     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </div>
@@ -52,6 +52,7 @@
 
 <!-- 展示诗词 -->
 <div class="container vw-50 full-poetry">
+    <%--导航条--%>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a
@@ -143,40 +144,6 @@
                     <p class="card-text">${varse}</p>
                 </c:forEach>
             </div>
-                <%--注释等--%>
-            <div class="card-footer">
-                <button class="btn card-link explanation-btn btn-active">注释</button>
-                <button class="btn card-link explanation-btn">翻译</button>
-                <button class="btn card-link explanation-btn">赏析</button>
-                <button class="btn card-link explanation-btn">作者</button>
-                <div class=" explanation">
-                    <!-- 注释 -->
-                    <div class="hide notes">
-                        <c:forEach items="${poetry.notes}" var="note">
-                            <p>${note}</p>
-                        </c:forEach>
-                    </div>
-                    <!-- 翻译 -->
-                    <div class="hide translate">
-                        <c:forEach items="${poetry.translate}" var="translate">
-                            <p>${translate}</p>
-                        </c:forEach>
-                        <c:forEach items="${poetry.translateRes}" var="translateRes">
-                            <p class="res text-muted">${translateRes}</p>
-                        </c:forEach>
-                    </div>
-                    <!-- 赏析 -->
-                    <div class="hide appreciation">
-                        <c:forEach items="${poetry.appreciation}" var="appr">
-                            <p>${appr}</p>
-                        </c:forEach>
-                    </div>
-                    <!-- 作者介绍 -->
-                    <div class="hide author">
-                        <p>${poetry.author.lifeTime}</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </c:forEach>
     <%--分页--%>
@@ -184,7 +151,7 @@
         <ul class="pagination justify-content-end">
             <c:if test="${page.pageNo==1}">
                 <li class="page-item disabled">
-                    <a class="page-link text-dark" href="#">
+                    <a class="page-link" href="#">
                         上一页
                     </a>
                 </li>
@@ -200,7 +167,7 @@
             <li class="page-item"><a class="page-link text-dark">${page.pageNo}/${page.totalPages}</a></li>
 
             <c:if test="${page.pageNo==page.totalPages}">
-                <li class="page-item disabled"><a class="page-link text-dark" href="#">下一页</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
             </c:if>
             <c:if test="${page.pageNo!=page.totalPages}">
                 <li class="page-item"><a class="page-link text-dark"

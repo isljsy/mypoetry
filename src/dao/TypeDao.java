@@ -31,4 +31,20 @@ public interface TypeDao {
      * @return
      */
     int typeForAuthorCount(int id);
+
+    /**
+     * 以id找类型
+     *
+     * @param typeId
+     * @return
+     */
+    Type findById(int typeId);
+
+
+    /**
+     * 所有类型的总数
+     *
+     * @return
+     */
+    int countAll();
 }

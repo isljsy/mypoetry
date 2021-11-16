@@ -37,8 +37,8 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/type">类型</a>
                     </li>
                 </ul>
-                <form action="searchresult.jsp" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+                <form action="${path}/result" class="form-inline my-2 my-lg-0">
+                    <input required name="words" class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
                     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </div>
@@ -64,8 +64,7 @@
                 <c:if test="${requestScope.pinyin == null}">所有拼音</c:if>
                 <c:if test="${requestScope.pinyin != null}"> ${requestScope.pinyin} </c:if>
             </a></li>
-            <li class="breadcrumb-item"><a class="" data-toggle="collapse" href="#author" role="button"
-                                           aria-expanded="false" aria-controls="collapseExample">作者</a></li>
+            <li class="breadcrumb-item">作者</li>
         </ol>
     </nav>
     <!-- 朝代列表 -->
@@ -116,7 +115,7 @@
 
                     <c:if test="${page.pageNo==1}">
                         <li class="page-item disabled">
-                            <a class="page-link text-dark" href="#">
+                            <a class="page-link" href="#">
                                 上一页
                             </a>
                         </li>
@@ -124,7 +123,7 @@
                     <c:if test="${page.pageNo!=1}">
                         <li class="page-item">
                             <a class="page-link text-dark"
-                               href="${path}/author?dynasty=${requestScope.dynasty}&page=${page.pageNo-1}">
+                               href="${path}/author?dynasty=${requestScope.dynasty}&pinyin=${requestScope.pinyin}&page=${page.pageNo-1}">
                                 上一页
                             </a>
                         </li>
@@ -134,7 +133,7 @@
 
                     <c:if test="${page.pageNo==page.totalPages}">
                         <li class="page-item disabled">
-                            <a class="page-link text-dark" href="#">
+                            <a class="page-link" href="#">
                                 下一页
                             </a>
                         </li>
@@ -142,7 +141,7 @@
                     <c:if test="${page.pageNo!=page.totalPages}">
                         <li class="page-item">
                             <a class="page-link text-dark"
-                               href="${path}/author?dynasty=${requestScope.dynasty}&page=${page.pageNo+1}">
+                               href="${path}/author?dynasty=${requestScope.dynasty}&pinyin=${requestScope.pinyin}&page=${page.pageNo+1}">
                                 下一页
                             </a>
                         </li>

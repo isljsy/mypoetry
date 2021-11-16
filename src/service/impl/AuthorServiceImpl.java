@@ -46,7 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public List<Author> findAll(Page page) {
-        return authorDao.findAll(page.getFrom(),page.getSize());
+        return authorDao.findAll(page.getFrom(), page.getSize());
     }
 
     /**
@@ -58,7 +58,7 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public List<Author> findAuthorByPinyin(String pinyin, Page page) {
-        return authorDao.findAuthorByPinyin(pinyin,page.getFrom(),page.getSize());
+        return authorDao.findAuthorByPinyin(pinyin, page.getFrom(), page.getSize());
     }
 
     /**
@@ -70,20 +70,20 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public List<Author> findAuthorByDynasty(int id, Page page) {
-        return authorDao.findAuthorByDynasty(id, page.getFrom(),page.getSize());
+        return authorDao.findAuthorByDynasty(id, page.getFrom(), page.getSize());
     }
 
     /**
      * 以朝代和拼音找作者
      *
-     * @param dynastyId  朝代id
-     * @param pinyin     拼音
-     * @param page 页数
+     * @param dynastyId 朝代id
+     * @param pinyin    拼音
+     * @param page      页数
      * @return 作者
      */
     @Override
     public List<Author> findAuthorByDynastyAndPinyin(int dynastyId, String pinyin, Page page) {
-        return authorDao.findAuthorByDynastyAndPinyin(dynastyId,pinyin,page.getFrom(),page.getSize());
+        return authorDao.findAuthorByDynastyAndPinyin(dynastyId, pinyin, page.getFrom(), page.getSize());
     }
 
     /**
@@ -116,7 +116,7 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public int countByDynastyAndPinyin(int dynastyId, String pinyin) {
-        return authorDao.countByDynastyAndPinyin(dynastyId,pinyin);
+        return authorDao.countByDynastyAndPinyin(dynastyId, pinyin);
     }
 
     /**
@@ -128,5 +128,17 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<String> findPinyinByDynasty(int dynastyId) {
         return authorDao.findPinyinByDynasty(dynastyId);
+    }
+
+    /**
+     * 名字中含有name的作者
+     *
+     * @param name
+     * @param page
+     * @return
+     */
+    @Override
+    public List<Author> findAuthorByName(String name, Page page) {
+        return authorDao.findAuthorByName(name, page.getFrom(), page.getSize());
     }
 }

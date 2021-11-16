@@ -32,11 +32,12 @@ public class AuthorServlet extends HttpServlet {
         AuthorService authorService = new AuthorServiceImpl();
         int size = 80;
 
-        List<String> pinyinList = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z");
+        List<String> pinyinList = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w", "x", "y", "z");
         // 选中的朝代
         int dynastyId = RequestUtil.getIntParameter(request, "dynasty");
         // 选中的拼音
         String pinyin = request.getParameter("pinyin");
+        pinyin = "".equals(pinyin) ? null : pinyin;
         // 当前作者页数
         int pageNo = RequestUtil.getIntParameter(request, "page");
 

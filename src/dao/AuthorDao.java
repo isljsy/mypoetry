@@ -12,20 +12,6 @@ import java.util.List;
 public interface AuthorDao {
 
     /**
-     * 以该字母为拼音开头的作者总数
-     * @param pinyin 拼音首字母
-     * @return 作者总数
-     */
-    int pinyinAuthorCount(String pinyin);
-
-    /**
-     * 此朝代的所有作者
-     * @param id 朝代id
-     * @return 作者总数
-     */
-    int dynastyAuthorCount(int id);
-
-    /**
      * 带分页
      *
      * @return 所有诗人和词人
@@ -51,13 +37,6 @@ public interface AuthorDao {
      */
     List<Author> findAuthorByDynasty(int id , int start, int size);
 
-    /**
-     * id删除作者
-     *
-     * @param id 作者id
-     * @return 删除的行数
-     */
-    int deleteAuthorById(int id);
 
 
     /**
@@ -122,4 +101,12 @@ public interface AuthorDao {
      * @return
      */
     List<String> findPinyinByDynasty(int dynastyId);
+
+    /**
+     * 名字中含有name的作者
+     *
+     * @param name
+     * @return
+     */
+    List<Author> findAuthorByName(String name, int from, int size);
 }

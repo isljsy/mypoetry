@@ -61,9 +61,9 @@ a:hover {
     box-shadow: 0 0 0 0.2rem rgb(255 255 255 / 0);
 }
 
-.btn:hover {
-    color: black;
-}
+/*.btn:hover {*/
+/*    color: black;*/
+/*}*/
 
 .btn-active,
 .nav-link.active {
@@ -176,4 +176,13 @@ footer {
 
 .m-top-lg{
     margin-top: 9em;
+}
+
+.card-footer,
+.navbar{
+    background-color:rgba(0,0,0,0.06) !important;
+}
+
+.page-item.disabled>a{
+    color: rgb(148 148 148 / 80%) !important;
 }

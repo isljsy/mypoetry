@@ -41,8 +41,8 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/type">类型</a>
                     </li>
                 </ul>
-                <form action="searchresult.jsp" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+                <form action="${path}/result" class="form-inline my-2 my-lg-0">
+                    <input  required name="words"  class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
                     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </div>
@@ -56,22 +56,22 @@
     <c:forEach items="${requestScope.list}" var="poetry">
         <div class="card">
             <div class="card-body">
-                    <%--标题--%>
-                <h3><a class="card-title text-dark" href="${path}/poetry?poetry=${poetry.id}">${poetry.title}</a></h3>
-                <p>
-                        <%--朝代 --%>
-                    <a class="card-subtitle mb-2 text-muted" href="${path}/dynasty?dynasty=${poetry.author.dynasty.id}">
-                        [${poetry.author.dynasty.dynastyName}]
-                    </a>
-                        <%--作者--%>
-                    <a class="card-subtitle mb-2 text-muted" href="${path}/author-details?author=${poetry.author.id}">
-                            ${poetry.author.name}
-                    </a>
-                </p>
-                    <%--诗句--%>
-                <c:forEach items="${poetry.content}" var="varse">
-                    <p class="card-text">${varse}</p>
-                </c:forEach>
+                            <%--标题--%>
+                        <h3><a class="card-title text-dark" href="${path}/poetry?poetry=${poetry.id}">${poetry.title}</a></h3>
+                        <p>
+                                <%--朝代 --%>
+                            <a class="card-subtitle mb-2 text-muted" href="${path}/dynasty?dynasty=${poetry.author.dynasty.id}">
+                                [${poetry.author.dynasty.dynastyName}]
+                            </a>
+                                <%--作者--%>
+                            <a class="card-subtitle mb-2 text-muted" href="${path}/author-details?author=${poetry.author.id}">
+                                    ${poetry.author.name}
+                            </a>
+                        </p>
+                            <%--诗句--%>
+                        <c:forEach items="${poetry.content}" var="varse">
+                            <p class="card-text">${varse}</p>
+                        </c:forEach>
             </div>
                 <%--注释等--%>
             <div class="card-footer">
@@ -114,7 +114,7 @@
         <ul class="pagination justify-content-end">
             <%--没有上一页时--%>
             <c:if test="${page.pageNo==1}">
-                <li class="page-item disabled"><a class="page-link text-dark" href="#">上一页</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
             </c:if>
             <%--上一页--%>
             <c:if test="${page.pageNo>1}">
@@ -127,7 +127,7 @@
 
             <%--没有下一页--%>
             <c:if test="${page.pageNo==page.totalPages}">
-                <li class="page-item disabled"><a class="page-link text-dark" href="#">下一页</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
             </c:if>
             <%--下一页--%>
             <c:if test="${page.pageNo!=page.totalPages}">

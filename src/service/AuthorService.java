@@ -81,4 +81,13 @@ public interface AuthorService {
      * @return
      */
     List<String> findPinyinByDynasty(int dynastyId);
+
+
+    /**
+     * 名字中含有name的作者
+     * @param name
+     * @param page
+     * @return
+     */
+    List<Author> findAuthorByName(String name, Page page);
 }

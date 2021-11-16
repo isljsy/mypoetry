@@ -39,8 +39,8 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/type">类型</a>
                     </li>
                 </ul>
-                <form action="searchresult.jsp" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+                <form action="${path}/result" class="form-inline my-2 my-lg-0">
+                    <input required name="words"  class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
                     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </div>
@@ -55,6 +55,11 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="" data-toggle="collapse" href="#dynasty" role="button"
                                            aria-expanded="false" aria-controls="collapseExample">所有朝代</a></li>
+            <c:if test="${requestScope.dynasty!=null}">
+                <li class="breadcrumb-item"><a href="${path}/dynasty?dynasty=${requestScope.dynasty.id}" >
+                        ${requestScope.dynasty.dynastyName}
+                </a></li>
+            </c:if>
         </ol>
     </nav>
 
@@ -93,12 +98,12 @@
     <c:forEach items="${requestScope.poetryList}" var="poetry">
         <div class="card">
             <div class="card-body">
-                <h3><a class="card-title text-dark">${poetry.title}</a></h3>
+                <h3><a class="card-title text-dark" href="${path}/poetry?poetry=${poetry.id}">${poetry.title}</a></h3>
                 <p>
                     <a class="card-subtitle mb-2 text-muted"
-                       href="${path}/${poetry.author.dynasty.id}">[${poetry.author.dynasty.dynastyName}]</a>
+                       href="${path}/dynasty?dynasty=${poetry.author.dynasty.id}">[${poetry.author.dynasty.dynastyName}]</a>
                     <a class="card-subtitle mb-2 text-muted"
-                       href="${path}/">${poetry.author.name}</a>
+                       href="${path}/author-details?author=${poetry.author.id}">${poetry.author.name}</a>
                 </p>
                     <%--诗句--%>
                 <c:forEach items="${poetry.content}" var="varse">
@@ -114,7 +119,7 @@
 
             <c:if test="${page.pageNo==1}">
                 <li class="page-item disabled">
-                    <a class="page-link text-dark" href="#">
+                    <a class="page-link" href="#">
                         上一页
                     </a>
                 </li>
@@ -128,11 +133,14 @@
                 </li>
             </c:if>
 
-            <li class="page-item"><a class="page-link text-dark">${page.pageNo}/${page.totalPages}</a></li>
+            <c:if test="${page.pageNo<page.totalPages}">
+                <li class="page-item"><a class="page-link text-dark">${page.pageNo}/...</a></li>
+            </c:if>
 
             <c:if test="${page.pageNo==page.totalPages}">
+                <li class="page-item"><a class="page-link text-dark">${page.pageNo}/${page.pageNo}</a></li>
                 <li class="page-item disabled">
-                    <a class="page-link text-dark" href="#">
+                    <a class="page-link" href="#">
                         下一页
                     </a>
                 </li>

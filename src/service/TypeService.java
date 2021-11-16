@@ -35,4 +35,10 @@ public interface TypeService {
      * @return
      */
     Type findById(int typeId);
+
+    /**
+     * 所有类型的总数
+     * @return
+     */
+    int countAll();
 }

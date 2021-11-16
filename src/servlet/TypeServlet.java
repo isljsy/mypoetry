@@ -22,35 +22,51 @@ import java.util.List;
 
 /**
  * 展示搜索框查询的结果
+ *
  * @author ljsy
  **/
 @WebServlet("/type")
 public class TypeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PoetryService poetryService = new PoetryServiceImpl();
-        AuthorService authorService = new AuthorServiceImpl();
         TypeService typeService = new TypeServiceImpl();
 
-        int typeId = RequestUtil.getIntParameter(request,"type");
-        int pageNo = RequestUtil.getIntParameter(request, "page");
-
-        Page page = new Page(pageNo,15,poetryService.countByType(typeId));
-
-        List<Type> typeList = typeService.findAll() ;
+        int typeId = RequestUtil.getIntParameter(request, "type");
+        int typePageNo = RequestUtil.getIntParameter(request, "tp");
+        int poetryPageNo = RequestUtil.getIntParameter(request, "pp");
 
 
-        if(typeId>0){
+        Page typePage = new Page(typePageNo, 100, typeService.countAll());
+
+        // 类型列表
+        List<Type> typeList = typeService.findAll(typePage);
+
+        // 如果有类型, 显示该类型的诗词
+        if (typeId > 0) {
+
+            int size = 10;
+            // 计数查询耗时太长, 所以总数依当前页数增加
+            poetryPageNo = poetryPageNo == 0 ? 1 : poetryPageNo;
+            int itemCount = poetryPageNo * size * 4;
+            Page poetryPage = new Page(poetryPageNo, size, itemCount);
+
             Type type = typeService.findById(typeId);
-            List<Poetry> poetryList = poetryService.findByType(typeId, page);
-            request.setAttribute("type",type);
-            request.setAttribute("poetryList",poetryList);
+            List<Poetry> poetryList = poetryService.findByType(typeId, poetryPage);
+            // 若返回的数据少于size, 说明数据到末页了
+            if (poetryList.size() < size) {
+                poetryPage.setTotalPages(poetryPageNo);
+            }
+            request.setAttribute("poetryPage",poetryPage);
+            request.setAttribute("type", type);
+            request.setAttribute("poetryList", poetryList);
         }
 
-        request.setAttribute("typeList",typeList);
-        request.getRequestDispatcher("/pages/type.jsp").forward(request,response);
+        request.setAttribute("typePage",typePage);
+        request.setAttribute("typeList", typeList);
+        request.getRequestDispatcher("/pages/type.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }

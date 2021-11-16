@@ -85,4 +85,22 @@ public interface PoetryService {
      * @return
      */
     int countByDynasty(int id);
+
+
+
+    /**
+     * 标题中含有title的诗词
+     * @param title
+     * @param page
+     * @return
+     */
+    List<Poetry> findByTitle(String title, Page page);
+
+
+    /**
+     * 内容中含有content的诗词
+     * @param
+     * @return
+     */
+    List<Poetry> findByContent(String words, Page page);
 }

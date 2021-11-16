@@ -15,28 +15,7 @@ import java.util.List;
  **/
 public class AuthorDaoImpl extends Dao implements AuthorDao {
 
-    /**
-     * 以该字母为拼音开头的作者总数
-     * 若拼音为空, 返回id排序的作者
-     *
-     * @param pinyin 拼音首字母
-     * @return 作者总数
-     */
-    @Override
-    public int pinyinAuthorCount(String pinyin) {
-        return 0;
-    }
 
-    /**
-     * 此朝代的所有作者
-     *
-     * @param id 朝代id
-     * @return 作者总数
-     */
-    @Override
-    public int dynastyAuthorCount(int id) {
-        return 0;
-    }
 
     /**
      * @return 所有诗人和词人
@@ -99,17 +78,6 @@ public class AuthorDaoImpl extends Dao implements AuthorDao {
         return list;
     }
 
-
-    /**
-     * id删除作者
-     *
-     * @param id 作者id
-     * @return 删除的行数
-     */
-    @Override
-    public int deleteAuthorById(int id) {
-        return 0;
-    }
 
 
     /**
@@ -240,12 +208,34 @@ public class AuthorDaoImpl extends Dao implements AuthorDao {
      */
     @Override
     public List<String> findPinyinByDynasty(int dynastyId) {
-        db.executeQuery("select distinct `pinyin` from `author` where `dynasty` = ?", Arrays.asList(dynastyId));
+        db.executeQuery("select distinct `pinyin` from `author` where `dynasty` = ? order by `pinyin`", Arrays.asList(dynastyId));
         List<String> list = new ArrayList<>();
         while(db.next()){
             list.add(db.getString(1));
         }
         return list;
+    }
+
+    /**
+     * 名字中含有name的作者
+     *
+     * @param name
+     * @param from
+     * @param size
+     * @return
+     */
+    @Override
+    public List<Author> findAuthorByName(String name, int from, int size) {
+        db.executeQuery("select `id`,`name`,`lifetime` from `author` where `name` like '%"+name+"%' limit ?,?", Arrays.asList(from,size));
+        List<Author> list = new ArrayList<>();
+        while (db.next()) {
+            Author author = new Author();
+            author.setId(db.getInt(1));
+            author.setName(db.getString(2));
+            author.setLifeTime(db.getString(3));
+            list.add(author);
+        }
+        return list.isEmpty()?null:list;
     }
 
 

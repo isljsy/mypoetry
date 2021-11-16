@@ -24,7 +24,7 @@ public class TypeServiceImpl implements TypeService {
      */
     @Override
     public List<Type> findAll(Page page) {
-        return null;
+        return typeDao.findAll(page.getFrom(),page.getSize());
     }
 
     /**
@@ -48,5 +48,26 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public int typeForAuthorCount(int id) {
         return 0;
+    }
+
+    /**
+     * 以id找类型
+     *
+     * @param typeId
+     * @return
+     */
+    @Override
+    public Type findById(int typeId) {
+        return typeDao.findById(typeId);
+    }
+
+    /**
+     * 所有类型的总数
+     *
+     * @return
+     */
+    @Override
+    public int countAll() {
+        return typeDao.countAll();
     }
 }
