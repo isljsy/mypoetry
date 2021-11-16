@@ -38,7 +38,7 @@
                     </li>
                 </ul>
                 <form action="${path}/result" class="form-inline my-2 my-lg-0">
-                    <input required class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+                    <input required name="words" class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
                     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </div>

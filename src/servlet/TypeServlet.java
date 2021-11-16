@@ -53,7 +53,7 @@ public class TypeServlet extends HttpServlet {
             Type type = typeService.findById(typeId);
             List<Poetry> poetryList = poetryService.findByType(typeId, poetryPage);
             // 若返回的数据少于size, 说明数据到末页了
-            if (poetryList.size() < size) {
+            if (poetryList==null||poetryList.size() < size) {
                 poetryPage.setTotalPages(poetryPageNo);
             }
             request.setAttribute("poetryPage",poetryPage);
